@@ -47,7 +47,8 @@
         android:textSize="15sp"
         android:drawableBottom="@color/colorBackground"
         android:textAlignment="center"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        />
 
     <Button
         android:text="           Ajuda           "

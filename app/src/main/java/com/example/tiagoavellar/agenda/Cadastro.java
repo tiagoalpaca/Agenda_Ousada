@@ -22,71 +22,65 @@ import android.widget.EditText.*;
 import android.widget.Spinner;
 import android.widget.*;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class Cadastro extends AppCompatActivity {
 
+    @BindView(R.id.button6) Button button6;
+    @BindView(R.id.button18) Button button18;
+
     //variaveis dos campos em branco
-    private EditText txt_endereco;
-    private EditText txt_email;
-    private EditText txt_nome;
-    private EditText txt_telefone;
-    private EditText txt_obs;
+    @BindView(R.id.txt_nome) EditText txt_nome;
+    @BindView(R.id.txt_endereco) EditText txt_endereco;
+    @BindView(R.id.txt_email) EditText txt_email;
+    @BindView(R.id.txt_telefone) EditText txt_telefone;
+    @BindView(R.id.txt_obs) EditText txt_obs;
+
     private String Nome, Email,Endereco,Telefone,Observacao;
 
     BancoDados db;
-    private Button button18, button6;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
-
-        txt_nome = (EditText) findViewById(R.id.txt_nome);
-        txt_endereco = (EditText) findViewById(R.id.txt_endereco);
-        txt_email = (EditText) findViewById(R.id.txt_email);
-        txt_telefone = (EditText) findViewById(R.id.txt_telefone);
-        txt_obs = (EditText) findViewById(R.id.txt_obs);
-
-        Button button18 = (Button) findViewById(R.id.button18);
-        Button button6 = (Button) findViewById(R.id.button6);
+        ButterKnife.bind(this);
         this.db = new BancoDados(this);
-
-        button18.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Nome = txt_nome.getText().toString();
-                Endereco = txt_endereco.getText().toString();
-                Email = txt_email.getText().toString();
-                Telefone = txt_telefone.getText().toString();
-                Observacao = txt_obs.getText().toString();
-
-
-                if (txt_nome.length() != 0 && txt_endereco.length() != 0 && txt_email.length() != 0 && txt_telefone.length() != 0 ) {
-                    db.CadastraCliente(new Cliente(Nome, Endereco, Email, Telefone,Observacao));
-
-                    Toast.makeText(Cadastro.this, "Cadastro Salvo", Toast.LENGTH_LONG).show();
-                    Intent it = new Intent(Cadastro.this, Login.class);
-                    startActivity(it);
-
-                } else {
-                    Toast.makeText(Cadastro.this, "Falta Dados para o Cadastro ", Toast.LENGTH_LONG).show();
-                    Intent it = new Intent(Cadastro.this, Cadastro.class);
-                    startActivity(it);
-                }
-            }
-        });
-
-        button6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent it = new Intent(Cadastro.this, Login.class);
-                startActivity(it);
-
-            }
-        });
     }
+
+    @OnClick(R.id.button18)
+    public void CadastraUsuario(){
+        Nome = txt_nome.getText().toString();
+        Endereco = txt_endereco.getText().toString();
+        Email = txt_email.getText().toString();
+        Telefone = txt_telefone.getText().toString();
+        Observacao = txt_obs.getText().toString();
+
+
+        if (txt_nome.length() != 0 && txt_endereco.length() != 0 && txt_email.length() != 0 && txt_telefone.length() != 0 ) {
+            db.CadastraCliente(new Cliente(Nome, Endereco, Email, Telefone,Observacao));
+
+            Toast.makeText(Cadastro.this, "Cadastro Salvo", Toast.LENGTH_LONG).show();
+            Intent it = new Intent(Cadastro.this, Login.class);
+            startActivity(it);
+
+        } else {
+            Toast.makeText(Cadastro.this, "Falta Dados para o Cadastro ", Toast.LENGTH_LONG).show();
+            Intent it = new Intent(Cadastro.this, Cadastro.class);
+            startActivity(it);
+        }
+    }
+        @OnClick(R.id.button6)
+        public void EntraLogin(){
+            Intent it = new Intent(Cadastro.this, Login.class);
+            startActivity(it);
+        }
+
+
 
 }
     /*
