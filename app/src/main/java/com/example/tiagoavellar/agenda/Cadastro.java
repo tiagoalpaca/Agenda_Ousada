@@ -26,11 +26,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class Cadastro extends AppCompatActivity {
+public class Cadastro extends AppCompatActivity implements CadastroView{
 
     @BindView(R.id.button6) Button button6;
     @BindView(R.id.button18) Button button18;
-
     //variaveis dos campos em branco
     @BindView(R.id.txt_nome) EditText txt_nome;
     @BindView(R.id.txt_endereco) EditText txt_endereco;
@@ -38,50 +37,44 @@ public class Cadastro extends AppCompatActivity {
     @BindView(R.id.txt_telefone) EditText txt_telefone;
     @BindView(R.id.txt_obs) EditText txt_obs;
 
-    private String Nome, Email,Endereco,Telefone,Observacao;
-
     BancoDados db;
 
-
-
+    CadastroPresenter cadastroPresenter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
         ButterKnife.bind(this);
         this.db = new BancoDados(this);
+
+        cadastroPresenter = new CadastroPresenter(this);
     }
 
     @OnClick(R.id.button18)
     public void CadastraUsuario(){
-        Nome = txt_nome.getText().toString();
-        Endereco = txt_endereco.getText().toString();
-        Email = txt_email.getText().toString();
-        Telefone = txt_telefone.getText().toString();
-        Observacao = txt_obs.getText().toString();
-
-
-        if (txt_nome.length() != 0 && txt_endereco.length() != 0 && txt_email.length() != 0 && txt_telefone.length() != 0 ) {
-            db.CadastraCliente(new Cliente(Nome, Endereco, Email, Telefone,Observacao));
-
-            Toast.makeText(Cadastro.this, "Cadastro Salvo", Toast.LENGTH_LONG).show();
-            Intent it = new Intent(Cadastro.this, Login.class);
-            startActivity(it);
-
-        } else {
-            Toast.makeText(Cadastro.this, "Falta Dados para o Cadastro ", Toast.LENGTH_LONG).show();
-            Intent it = new Intent(Cadastro.this, Cadastro.class);
-            startActivity(it);
+        cadastroPresenter.login(txt_nome.getText().toString(),txt_telefone.getText().toString());
         }
-    }
+
         @OnClick(R.id.button6)
         public void EntraLogin(){
             Intent it = new Intent(Cadastro.this, Login.class);
             startActivity(it);
         }
 
-
-
+    @Override
+    public void sucessoCadastro(){
+        db.CadastraCliente(new Cliente(txt_nome.getText().toString(),txt_endereco.getText().toString(),txt_email.getText().toString(),
+                txt_telefone.getText().toString(),txt_obs.getText().toString()));
+        Toast.makeText(Cadastro.this, "Cadastro feito com Sucesso ", Toast.LENGTH_LONG).show();
+        Intent it = new Intent(Cadastro.this, Login.class);
+        startActivity(it);
+    }
+    @Override
+    public void falhoCadastro(){
+        Toast.makeText(Cadastro.this, "Falta dados para o Cadastro ", Toast.LENGTH_LONG).show();
+        Intent it = new Intent(Cadastro.this, Cadastro.class);
+        startActivity(it);
+    }
 }
     /*
 

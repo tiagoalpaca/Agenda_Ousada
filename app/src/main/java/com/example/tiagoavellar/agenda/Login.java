@@ -23,7 +23,6 @@ public class Login extends AppCompatActivity {
     @BindView(R.id.button5) Button button5;
     @BindView(R.id.button7) Button button7;
     @BindView(R.id.button8) Button button8;
-    BancoDados db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
