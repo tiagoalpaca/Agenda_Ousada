@@ -6,6 +6,6 @@ package com.example.tiagoavellar.agenda;
 
 public interface CadastroView {
 
-    void sucessoCadastro();
+    void sucessoCadastro(String nome,String endereco, String email,String telefone, String observacao);
     void falhoCadastro();
 }

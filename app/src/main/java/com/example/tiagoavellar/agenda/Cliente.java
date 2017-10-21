@@ -29,9 +29,9 @@ public class Cliente extends AppCompatActivity {
         this.observacao = observacao;
     }
 
-    public Cliente(String nome1){
+    public Cliente(String nome){
 
-        this.nome = nome1;
+        this.nome = nome;
     }
 
 

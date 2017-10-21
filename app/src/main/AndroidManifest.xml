@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Cadastro"/>
-        <activity android:name=".Login"/>
+        <activity android:name=".Menu"/>
         <activity android:name=".MenuAjuda"/>
 
 

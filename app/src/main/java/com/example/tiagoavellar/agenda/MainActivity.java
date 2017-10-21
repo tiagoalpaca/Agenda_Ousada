@@ -1,15 +1,12 @@
 package com.example.tiagoavellar.agenda;
 
 import android.content.Intent;
-import android.support.annotation.BinderThread;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnTextChanged;
 
 
 public class MainActivity extends AppCompatActivity  {
@@ -24,7 +21,7 @@ public class MainActivity extends AppCompatActivity  {
     }
         @OnClick(R.id.button)
         public void EntraAplicativo(){
-                Intent it = new Intent(MainActivity.this, Login.class);
+                Intent it = new Intent(MainActivity.this, Menu.class);
                 startActivity(it);
                 }
 

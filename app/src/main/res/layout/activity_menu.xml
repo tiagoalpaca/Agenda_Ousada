@@ -5,6 +5,8 @@
     android:background="@color/colorAccent"
     android:layout_height="match_parent">
 
+
+
     <TextView
         android:text="Escolha a opção que deseja:"
         android:layout_width="wrap_content"
@@ -20,8 +22,34 @@
         android:textAlignment="center"
         />
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:layout_marginTop="100dp"
+            android:text="Pesquisar"
+            android:background="#ffffff"
+            android:ems="25"
+            android:id="@+id/txt_pesquisa"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            app:srcCompat="@android:drawable/ic_menu_search"
+            android:id="@+id/ButaoPesquisa"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
     <Button
-        android:text="Buscar Contato"
+        android:text="Exibir Contatos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -39,20 +67,12 @@
         android:id="@+id/button5" />
 
     <Button
-        android:text="Deletar Contato"
+        android:text="Voltar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_gravity="center"
         android:textSize="20sp"
-        android:id="@+id/button7" />
+        android:id="@+id/button6" />
 
-    <Button
-        android:text="Editar Contato"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center"
-        android:textSize="20sp"
-        android:id="@+id/button8" />
 </LinearLayout>

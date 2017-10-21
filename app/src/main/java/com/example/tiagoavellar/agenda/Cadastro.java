@@ -4,22 +4,10 @@ package com.example.tiagoavellar.agenda;
  * Created by Tiago Avellar on 29/09/2017.
  */
 
-import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.location.Address;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.util.Log;
-import android.view.*;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText.*;
-import android.widget.Spinner;
 import android.widget.*;
 
 import butterknife.BindView;
@@ -36,7 +24,7 @@ public class Cadastro extends AppCompatActivity implements CadastroView{
     @BindView(R.id.txt_email) EditText txt_email;
     @BindView(R.id.txt_telefone) EditText txt_telefone;
     @BindView(R.id.txt_obs) EditText txt_obs;
-
+    String teste;
     BancoDados db;
 
     CadastroPresenter cadastroPresenter;
@@ -52,21 +40,23 @@ public class Cadastro extends AppCompatActivity implements CadastroView{
 
     @OnClick(R.id.button18)
     public void CadastraUsuario(){
-        cadastroPresenter.login(txt_nome.getText().toString(),txt_telefone.getText().toString());
+        cadastroPresenter.login(txt_nome.getText().toString(),txt_endereco.getText().toString(),txt_email.getText().toString(),
+                txt_telefone.getText().toString(),txt_obs.getText().toString());
         }
 
         @OnClick(R.id.button6)
         public void EntraLogin(){
-            Intent it = new Intent(Cadastro.this, Login.class);
+            Intent it = new Intent(Cadastro.this, Menu.class);
             startActivity(it);
         }
 
     @Override
-    public void sucessoCadastro(){
-        db.CadastraCliente(new Cliente(txt_nome.getText().toString(),txt_endereco.getText().toString(),txt_email.getText().toString(),
-                txt_telefone.getText().toString(),txt_obs.getText().toString()));
-        Toast.makeText(Cadastro.this, "Cadastro feito com Sucesso ", Toast.LENGTH_LONG).show();
-        Intent it = new Intent(Cadastro.this, Login.class);
+    public void sucessoCadastro(String nome,String endereco, String email,String telefone, String observacao){
+        //db.CadastraCliente(new Cliente(txt_nome.getText().toString(),txt_endereco.getText().toString(),txt_email.getText().toString(),
+          //txt_telefone.getText().toString(),txt_obs.getText().toString()));
+        teste = db.CadastraCliente(new Cliente(nome,endereco,email,telefone,observacao));
+        Toast.makeText(Cadastro.this, teste, Toast.LENGTH_LONG).show();
+        Intent it = new Intent(Cadastro.this, Menu.class);
         startActivity(it);
     }
     @Override

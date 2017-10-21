@@ -66,7 +66,7 @@ public class BancoDados extends SQLiteOpenHelper {
     }
 
     //Cadastra o cliente no sistema usando a classe modelo
-    public void CadastraCliente(Cliente cliente) {
+    public String CadastraCliente(Cliente cliente) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -79,20 +79,23 @@ public class BancoDados extends SQLiteOpenHelper {
         db.insert(BancoDados.TABELA_CLIENTE, null, values);
         db.close();
 
+        String sucesso ="O Cadastro foi feito com Sucesso";
+        return sucesso;
     }
 
     public String BuscaCliente(Cliente cliente) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String VerSenha = "select nome from " + TABELA_CLIENTE;
-        Cursor cursor = db.rawQuery(VerSenha, null);
+        String VerNome = "select nome from " + TABELA_CLIENTE;
+        //String ExibeContato = "select * from " + TABELA_CLIENTE;
+        Cursor cursor = db.rawQuery(VerNome, null);
+        //Cursor cursor1 = db.rawQuery(ExibeContato,null);
         String username;
         username = "Nao encontrado";
 
         if (cursor.moveToFirst()) {
             do {
                 username = cursor.getString(0);
-
                 if (username.equals(cliente.getNome())) {
                     return username;
                 }
@@ -122,6 +125,14 @@ public class BancoDados extends SQLiteOpenHelper {
         values.put(COLUNA_OBSERVACAO, cliente.getObservacao());
 
         db.update(TABELA_CLIENTE, values, COLUNA_NOME + " = ?", new String[] {cliente.getNome()});
+    }
+
+    public Cursor MostraLista(){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String VerCliente = "select nome from " + TABELA_CLIENTE;
+        Cursor cursor = db.rawQuery(VerCliente, null);
+        return cursor;
     }
 
 }

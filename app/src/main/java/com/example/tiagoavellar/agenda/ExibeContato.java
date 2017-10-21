@@ -3,7 +3,6 @@ package com.example.tiagoavellar.agenda;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,7 +15,7 @@ import butterknife.OnClick;
  * Created by Tiago Avellar on 05/10/2017.
  */
 
-public class BuscaContato extends AppCompatActivity {
+public class ExibeContato extends AppCompatActivity {
 
     //variaveis dos campos em branco
     @BindView(R.id.txt_busca) EditText txt_busca;
@@ -43,19 +42,19 @@ public class BuscaContato extends AppCompatActivity {
         busca = txt_busca.getText().toString();
 
         if (txt_busca.length() != 0 && db.BuscaCliente(new Cliente(busca)) != "Nao encontrado") {
-            Toast.makeText(BuscaContato.this, "Cadastro Encontrado", Toast.LENGTH_LONG).show();
-            Intent it = new Intent(BuscaContato.this, BuscaContato.class);
+            Toast.makeText(ExibeContato.this, "Cadastro Encontrado", Toast.LENGTH_LONG).show();
+            Intent it = new Intent(ExibeContato.this, ExibeContato.class);
             startActivity(it);
         } else {
-            Toast.makeText(BuscaContato.this, "Contato nao encontrado ", Toast.LENGTH_LONG).show();
-            Intent it = new Intent(BuscaContato.this, BuscaContato.class);
+            Toast.makeText(ExibeContato.this, "Contato nao encontrado ", Toast.LENGTH_LONG).show();
+            Intent it = new Intent(ExibeContato.this, ExibeContato.class);
             startActivity(it);
         }
     }
 
     @OnClick(R.id.button4)
     public void VoltaLogin(){
-        Intent it = new Intent(BuscaContato.this, Login.class);
+        Intent it = new Intent(ExibeContato.this, Menu.class);
         startActivity(it);
     }
 
