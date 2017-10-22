@@ -3,9 +3,13 @@ package com.example.tiagoavellar.agenda;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,44 +22,19 @@ import butterknife.OnClick;
 public class ExibeContato extends AppCompatActivity {
 
     //variaveis dos campos em branco
-    @BindView(R.id.txt_busca) EditText txt_busca;
-
-    private String busca;
-
+    @BindView(R.id.list_tudo) ListView lv;
+    ArrayList<String> lista;
+    ArrayAdapter adaptador;
     BancoDados db;
-
-    @BindView(R.id.button2) Button button2;
-    @BindView(R.id.button4) Button button4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro);
+        setContentView(R.layout.activity_exibe_contato);
         ButterKnife.bind(this);
         this.db = new BancoDados(this);
+        lista = db.MostraLista();
+        adaptador= new ArrayAdapter(this, android.R.layout.simple_list_item_1,lista);
+        lv.setAdapter(adaptador);
     }
-
-
-
-    @OnClick(R.id.button2)
-    public void Busca(){
-        busca = txt_busca.getText().toString();
-
-        if (txt_busca.length() != 0 && db.BuscaCliente(new Cliente(busca)) != "Nao encontrado") {
-            Toast.makeText(ExibeContato.this, "Cadastro Encontrado", Toast.LENGTH_LONG).show();
-            Intent it = new Intent(ExibeContato.this, ExibeContato.class);
-            startActivity(it);
-        } else {
-            Toast.makeText(ExibeContato.this, "Contato nao encontrado ", Toast.LENGTH_LONG).show();
-            Intent it = new Intent(ExibeContato.this, ExibeContato.class);
-            startActivity(it);
-        }
-    }
-
-    @OnClick(R.id.button4)
-    public void VoltaLogin(){
-        Intent it = new Intent(ExibeContato.this, Menu.class);
-        startActivity(it);
-    }
-
 }

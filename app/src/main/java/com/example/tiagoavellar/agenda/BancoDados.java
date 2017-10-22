@@ -19,7 +19,10 @@ import android.content.*;
 import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class BancoDados extends SQLiteOpenHelper {
 
@@ -127,12 +130,18 @@ public class BancoDados extends SQLiteOpenHelper {
         db.update(TABELA_CLIENTE, values, COLUNA_NOME + " = ?", new String[] {cliente.getNome()});
     }
 
-    public Cursor MostraLista(){
+    public ArrayList MostraLista(){
+        ArrayList<String> lista = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
+        String VerNome = "select nome from " + TABELA_CLIENTE;
+        Cursor cursor = db.rawQuery(VerNome, null);
 
-        String VerCliente = "select nome from " + TABELA_CLIENTE;
-        Cursor cursor = db.rawQuery(VerCliente, null);
-        return cursor;
+        if (cursor.moveToFirst()) {
+            do {
+                lista.add(cursor.getString(0));
+            } while (cursor.moveToNext());
+        }
+        return lista;
     }
 
 }
