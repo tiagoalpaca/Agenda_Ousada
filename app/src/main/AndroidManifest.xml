@@ -25,9 +25,8 @@
         </activity>
         <activity android:name=".Cadastro"/>
         <activity android:name=".Menu"/>
+        <activity android:name=".ExibeContato"/>
         <activity android:name=".MenuAjuda"/>
-
-
     </application>
 
 </manifest>

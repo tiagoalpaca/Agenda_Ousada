@@ -16,14 +16,14 @@ public class CadastroPresenter {
         this.cadastroView = cadastroView;
     }
 
-    public void login(String nome,String endereco, String email,String telefone, String observacao) {
+    public void login(String nome,String endereco, String email,String telefone) {
 
         if (TextUtils.isEmpty(nome)) {
             cadastroView.falhoCadastro();
         } else if (TextUtils.isEmpty(telefone)) {
             cadastroView.falhoCadastro();
         }else{
-            cadastroView.sucessoCadastro(nome,endereco,email,telefone,observacao);
+            cadastroView.sucessoCadastro(nome,endereco,email,telefone);
         }
     }
 }

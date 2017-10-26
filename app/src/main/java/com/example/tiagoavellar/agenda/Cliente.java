@@ -9,24 +9,15 @@ import android.support.v7.app.AppCompatActivity;
 public class Cliente extends AppCompatActivity {
 
 
-    String nome,email,endereco,telefone,observacao;
+    String nome,email,endereco,telefone;
 
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
-    }
 
-    public String getObservacao() {
-
-        return observacao;
-    }
-
-    public Cliente(String nome1, String email1, String endereco, String telefone, String observacao){
+    public Cliente(String nome1, String email1, String endereco, String telefone){
 
         this.nome = nome1;
         this.email = email1;
         this.endereco = endereco;
         this.telefone = telefone;
-        this.observacao = observacao;
     }
 
     public Cliente(String nome){

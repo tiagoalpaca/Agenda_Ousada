@@ -97,25 +97,7 @@
         android:id="@+id/txt_telefone"
         android:layout_weight="0.13" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txt_obsview"
-        android:textSize="24sp"
-        android:layout_weight="0.13"
-        android:text="Observacao" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:background="#ffffff"
-        android:ems="15"
-        android:id="@+id/txt_obs"
-        android:layout_weight="0.13"
-        android:text="" />
-
-        <Button
+    <Button
                 android:text="CONFIRMAR"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

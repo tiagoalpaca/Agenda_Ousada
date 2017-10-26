@@ -23,7 +23,6 @@ public class Cadastro extends AppCompatActivity implements CadastroView{
     @BindView(R.id.txt_endereco) EditText txt_endereco;
     @BindView(R.id.txt_email) EditText txt_email;
     @BindView(R.id.txt_telefone) EditText txt_telefone;
-    @BindView(R.id.txt_obs) EditText txt_obs;
     String teste;
     BancoDados db;
 
@@ -41,7 +40,7 @@ public class Cadastro extends AppCompatActivity implements CadastroView{
     @OnClick(R.id.button18)
     public void CadastraUsuario(){
         cadastroPresenter.login(txt_nome.getText().toString(),txt_endereco.getText().toString(),txt_email.getText().toString(),
-                txt_telefone.getText().toString(),txt_obs.getText().toString());
+                txt_telefone.getText().toString());
         }
 
         @OnClick(R.id.button6)
@@ -51,10 +50,11 @@ public class Cadastro extends AppCompatActivity implements CadastroView{
         }
 
     @Override
-    public void sucessoCadastro(String nome,String endereco, String email,String telefone, String observacao){
+    public void sucessoCadastro(String nome,String endereco, String email,String telefone){
         //db.CadastraCliente(new Cliente(txt_nome.getText().toString(),txt_endereco.getText().toString(),txt_email.getText().toString(),
           //txt_telefone.getText().toString(),txt_obs.getText().toString()));
-        teste = db.CadastraCliente(new Cliente(nome,endereco,email,telefone,observacao));
+        this.db = new BancoDados(this);
+      teste = db.CadastraCliente(new Cliente(nome,email,endereco,telefone));
         Toast.makeText(Cadastro.this, teste, Toast.LENGTH_LONG).show();
         Intent it = new Intent(Cadastro.this, Menu.class);
         startActivity(it);

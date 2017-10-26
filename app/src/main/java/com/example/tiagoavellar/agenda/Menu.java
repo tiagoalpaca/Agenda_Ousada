@@ -32,8 +32,6 @@ public class Menu extends AppCompatActivity implements MenuView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         ButterKnife.bind(this);
-        this.db = new BancoDados(this);
-
         menuPresenter = new MenuPresenter(this);
     }
 
@@ -61,6 +59,7 @@ public class Menu extends AppCompatActivity implements MenuView {
 
     @Override
     public void sucessoPesquisa(String pesquisa){
+        this.db = new BancoDados(this);
         nome = db.BuscaCliente(new Cliente(pesquisa));
         Toast.makeText(Menu.this, nome, Toast.LENGTH_LONG).show();
         Intent it = new Intent(Menu.this, Menu.class);

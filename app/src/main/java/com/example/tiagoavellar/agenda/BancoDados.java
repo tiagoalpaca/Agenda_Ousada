@@ -26,10 +26,8 @@ import java.util.ArrayList;
 
 public class BancoDados extends SQLiteOpenHelper {
 
-    //private static final int VERSAO_BANCO = 1 - 10;
-    //private static final String BANCO_CLIENTE = "bd_reserva"-bd;
     private static final int VERSAO_BANCO = 121;
-    private static final String BANCO_CLIENTE = "bd-agenda";
+    private static final String BANCO_CLIENTE = "bd";
 
     //DADOS DOS clientes
     private static final String TABELA_CLIENTE = "td_cliente";
@@ -38,10 +36,10 @@ public class BancoDados extends SQLiteOpenHelper {
     private static final String COLUNA_EMAIL = "email";
     private static final String COLUNA_ENDERECO = "endereco";
     private static final String COLUNA_TELEFONE = "telefone";
-    private static final String COLUNA_OBSERVACAO = "observacao";
+
 
     //criar banco de dados
-    private static final String QUERY_COLUNACLIENTE = "CREATE TABLE " + TABELA_CLIENTE + "(" + COLUNA_IDCliente + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUNA_NOME + " TEXT," + COLUNA_EMAIL + " TEXT" + COLUNA_ENDERECO + " TEXT" + COLUNA_TELEFONE + " TEXT" + COLUNA_OBSERVACAO + " TEXT)";
+    private static final String QUERY_COLUNACLIENTE = "CREATE TABLE " + TABELA_CLIENTE + "(" + COLUNA_IDCliente + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUNA_NOME + " TEXT," + COLUNA_EMAIL + " TEXT," + COLUNA_ENDERECO + " TEXT," + COLUNA_TELEFONE + " TEXT)";
 
     public BancoDados(Context context) {
         super(context, BANCO_CLIENTE, null, VERSAO_BANCO);
@@ -77,7 +75,6 @@ public class BancoDados extends SQLiteOpenHelper {
         values.put(COLUNA_EMAIL, cliente.getEmail());
         values.put(COLUNA_ENDERECO, cliente.getEndereco());
         values.put(COLUNA_TELEFONE, cliente.getTelefone());
-        values.put(COLUNA_OBSERVACAO, cliente.getObservacao());
 
         db.insert(BancoDados.TABELA_CLIENTE, null, values);
         db.close();
@@ -125,7 +122,6 @@ public class BancoDados extends SQLiteOpenHelper {
         values.put(COLUNA_EMAIL, cliente.getEmail());
         values.put(COLUNA_ENDERECO, cliente.getEndereco());
         values.put(COLUNA_TELEFONE, cliente.getTelefone());
-        values.put(COLUNA_OBSERVACAO, cliente.getObservacao());
 
         db.update(TABELA_CLIENTE, values, COLUNA_NOME + " = ?", new String[] {cliente.getNome()});
     }
