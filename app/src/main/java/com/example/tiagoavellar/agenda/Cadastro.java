@@ -4,15 +4,23 @@ package com.example.tiagoavellar.agenda;
  * Created by Tiago Avellar on 29/09/2017.
  */
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.*;
 
+import java.io.File;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import com.squareup.picasso.Picasso;
+
 
 public class Cadastro extends AppCompatActivity implements CadastroView{
 
@@ -23,8 +31,12 @@ public class Cadastro extends AppCompatActivity implements CadastroView{
     @BindView(R.id.txt_endereco) EditText txt_endereco;
     @BindView(R.id.txt_email) EditText txt_email;
     @BindView(R.id.txt_telefone) EditText txt_telefone;
+    @BindView(R.id.foto) public ImageView campoFoto;
     String teste;
     BancoDados db;
+
+    private static final int CODIGO_CAMERA = 123;
+    public String caminhoFoto;
 
     CadastroPresenter cadastroPresenter;
     @Override
@@ -64,6 +76,30 @@ public class Cadastro extends AppCompatActivity implements CadastroView{
         Toast.makeText(Cadastro.this, "Falta dados para o Cadastro ", Toast.LENGTH_LONG).show();
         Intent it = new Intent(Cadastro.this, Cadastro.class);
         startActivity(it);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CODIGO_CAMERA && resultCode == Activity.RESULT_OK) {
+            exibeFoto();
+        }
+    }
+
+    @OnClick(R.id.button10)
+    public void tiraFoto(){
+        Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        caminhoFoto = getExternalFilesDir(null) + "/" + System.currentTimeMillis() + ".jpg";
+        File arquivoFoto = new File(caminhoFoto);
+        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(arquivoFoto));
+        startActivityForResult(intentCamera, CODIGO_CAMERA);
+    }
+
+    private void exibeFoto(){
+        Picasso.with(this)
+                .load("file://"+caminhoFoto)
+                .fit()
+                .centerCrop()
+                .into(campoFoto);
     }
 }
     /*
